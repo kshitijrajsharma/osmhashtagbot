@@ -4,10 +4,10 @@ import tweepy
 
 # Authenticate using your API keys and access tokens
 auth = tweepy.OAuth1UserHandler(
-    os.environ.get(consumer_key),
-    os.environ.get(consumer_secret),
-    os.environ.get(access_token),
-    os.environ.get(access_token_secret),
+    os.environ.get(API_KEY),
+    os.environ.get(API_SECRET),
+    os.environ.get(ACCESS_TOKEN),
+    os.environ.get(ACCESS_TOKEN_SECRET),
 )
 api = tweepy.API(auth)
 
