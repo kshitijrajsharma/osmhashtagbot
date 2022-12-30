@@ -3,13 +3,18 @@ import os
 import tweepy
 
 # Authenticate using your API keys and access tokens
-auth = tweepy.OAuth1UserHandler(
-    os.environ.get("API_KEY"),
-    os.environ.get("API_SECRET"),
-    os.environ.get("ACCESS_TOKEN"),
-    os.environ.get("ACCESS_TOKEN_SECRET"),
+auth = tweepy.OAuthHandler(os.environ.get("API_KEY"), os.environ.get("API_SECRET"))
+auth.set_access_token(
+    os.environ.get("ACCESS_TOKEN"), os.environ.get("ACCESS_TOKEN_SECRET")
 )
+
 api = tweepy.API(auth)
+
+try:
+    api.verify_credentials()
+    print("Authentication OK")
+except:
+    print("Error during authentication")
 
 # Search for tweets containing either #osm or #openstreetmap
 tweets = api.search_tweets(
