@@ -16,7 +16,7 @@ except:
 
 # Search for tweets containing either #osm or #openstreetmap
 tweets = api.search_tweets(
-    q="#osm OR #openstreetmap OR #OSM OR #OPENSTREETMAP OR #HOTOSM OR #hotosm",
+    q="#osm OR #openstreetmap OR @hotosm OR @openstreetmap OR #OSM OR #OPENSTREETMAP OR #HOTOSM OR #hotosm",
     lang="en",
 )
 
