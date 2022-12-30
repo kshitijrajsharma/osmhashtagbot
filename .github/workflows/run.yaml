@@ -4,7 +4,7 @@ on:
     - cron: '0 0 * * *' # Run at midnight every day
   push:
     branches:
-      - master
+      - master # run also on push
 jobs:
   issue:
     runs-on: ubuntu-latest
