@@ -22,4 +22,8 @@ tweets = api.search_tweets(
 # Retweet each tweet that was found
 for tweet in tweets:
     print(f"Retweeting {tweet.id}")
-    api.retweet(tweet.id)
+    try:
+        api.like(tweet.id)
+        api.retweet(tweet.id)
+    except tweepy.TweepError as e:
+        print(e)
