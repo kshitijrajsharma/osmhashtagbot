@@ -12,7 +12,9 @@ auth = tweepy.OAuth1UserHandler(
 api = tweepy.API(auth)
 
 # Search for tweets containing either #osm or #openstreetmap
-tweets = api.search(q="#osm OR #openstreetmap OR #OSM OR #OPENSTREETMAP", lang="en")
+tweets = api.search_tweets(
+    q="#osm OR #openstreetmap OR #OSM OR #OPENSTREETMAP", lang="en"
+)
 
 # Retweet each tweet that was found
 for tweet in tweets:
