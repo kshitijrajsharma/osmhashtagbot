@@ -1,0 +1,27 @@
+name: Run twitter Bot
+on:
+  schedule:
+    - cron: '0 0 * * *' # Run at midnight every day
+  push:
+    branches:
+      - master
+jobs:
+  issue:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python 3.8
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.8
+      - name : Install necessary dependecies  
+        run : 
+          pip install -r requirements.txt
+      - name : Run App 
+        env:
+          API_KEY: ${{ secrets.API_KEY }}
+          API_SECRET: ${{ secrets.API_SECRET }}
+          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          ACCESS_TOKEN_SECRET: ${{ secrets.ACCESS_TOKEN_SECRET }}
+        run:
+          python app.py

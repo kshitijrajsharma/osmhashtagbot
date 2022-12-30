@@ -16,4 +16,5 @@ tweets = api.search(q="#osm OR #openstreetmap OR #OSM OR #OPENSTREETMAP", lang="
 
 # Retweet each tweet that was found
 for tweet in tweets:
+    print(f"Retweeting {tweet.id}")
     api.retweet(tweet.id)
