@@ -15,7 +15,7 @@ except:
     print("Error during authentication")
 
 # Search for tweets containing either #osm or #openstreetmap
-tweets = api.search_tweets(
+tweets = api.search_recent_tweets(
     q="#osm OR #openstreetmap OR #OSM OR #openmapping OR #OPENSTREETMAP OR #HOTOSM OR #hotosm",
 )
 
