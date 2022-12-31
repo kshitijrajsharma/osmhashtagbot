@@ -1,7 +1,7 @@
 name: Run twitter Bot
 on:
   schedule:
-    - cron: '2 * * * *' # Run every hour
+    - cron: '3 * * * *' # Run every 3 hour
   push:
     branches:
       - master # run also on push
