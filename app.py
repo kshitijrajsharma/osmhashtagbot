@@ -2,37 +2,28 @@ import os
 
 import tweepy
 
-bearer_token = os.environ["BEARER_TOKEN"]
+# Authenticate using your API keys and access tokens
+auth = tweepy.OAuthHandler(os.environ["API_KEY"], os.environ["API_KEY_SECRET"])
+auth.set_access_token(os.environ["ACCESS_TOKEN"], os.environ["ACCESS_TOKEN_SECRET"])
 
-consumer_key = os.environ["API_KEY"]
-consumer_secret = os.environ["API_KEY_SECRET"]
+api = tweepy.API(auth)
 
-access_token = os.environ["ACCESS_TOKEN"]
-access_token_secret = os.environ["ACCESS_TOKEN_SECRET"]
+try:
+    api.verify_credentials()
+    print("Authentication OK")
+except:
+    print("Error during authentication")
 
 
-# You can authenticate as your app with just your bearer token
-client = tweepy.Client(bearer_token=bearer_token)
-
-# You can provide the consumer key and secret with the access token and access
-# token secret to authenticate as a user
-client = tweepy.Client(
-    consumer_key=consumer_key,
-    consumer_secret=consumer_secret,
-    access_token=access_token,
-    access_token_secret=access_token_secret,
-)
-# Search for tweets containing either #osm or #openstreetmap
-
-response = client.search_recent_tweets(
+for tweet in tweepy.Cursor(
+    api.search_tweets,
     "#osm OR #openstreetmap OR #OSM OR #OPENSTREETMAP OR #HOTOSM OR #hotosm",
-    max_results=100,
-)
-
-# Retweet each tweet that was found
-for tweet in response:
+    count=100,
+).items():
+    count = 0
     try:
-        client.retweet(tweet.id)
-        print(f"Retweeted {tweet.id}")
+        api.retweet(tweet.id)
+        count = count + 1
     except Exception as e:
         print(e)
+    print(f"Retweeted {count} tweets")
