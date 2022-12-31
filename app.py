@@ -26,4 +26,4 @@ for tweet in tweepy.Cursor(
         count = count + 1
     except Exception as e:
         print(e)
-    print(f"Retweeted {count} tweets")
+print(f"Retweeted {count} tweets")
