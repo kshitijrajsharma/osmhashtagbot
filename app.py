@@ -26,6 +26,7 @@ tweets = tweepy.Cursor(
     count=100,
     tweet_mode="extended",
 ).items()
+print(len(tweets))
 
 # Retweet the tweets
 for tweet in tweets:
