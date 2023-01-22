@@ -30,6 +30,7 @@ print(tweets)
 
 # Retweet the tweets
 for tweet in tweets:
+    print(tweet)
     if (
         api.rate_limit_status()["resources"]["statuses"]["/statuses/retweet/:id"][
             "remaining"
