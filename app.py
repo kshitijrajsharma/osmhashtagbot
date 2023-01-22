@@ -9,7 +9,6 @@ auth.set_access_token(os.environ["ACCESS_TOKEN"], os.environ["ACCESS_TOKEN_SECRE
 
 print("started")
 api = tweepy.API(auth)
-print(api.rate_limit_status())
 try:
     api.verify_credentials()
     print("Authentication OK")
