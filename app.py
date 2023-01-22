@@ -14,13 +14,13 @@ try:
 except:
     print("Error during authentication")
 
-
+count = 0
 for tweet in tweepy.Cursor(
     api.search_tweets,
     "#osm OR #openstreetmap OR #OSM OR #OPENSTREETMAP OR #HOTOSM OR #hotosm -filter:retweets",
     count=300,
 ).items():
-    count = 0
+
     try:
         api.retweet(tweet.id)
         count = count + 1
