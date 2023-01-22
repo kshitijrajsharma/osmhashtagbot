@@ -22,7 +22,7 @@ count = 0
 # Search for tweets
 tweets = tweepy.Cursor(
     api.search_tweets,
-    q="#openstreetmap #hotosm filter:nativeretweets exclude:retweets",
+    q="#openstreetmap #hotosm -filter:retweets",
     count=100,
     tweet_mode="extended",
 ).items()
