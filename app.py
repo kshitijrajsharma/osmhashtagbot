@@ -19,11 +19,12 @@ count = 0
 for tweet in tweepy.Cursor(
     api.search_tweets,
     "#osm OR #openstreetmap OR #OSM OR #OPENSTREETMAP OR #HOTOSM OR #hotosm filter:nativeretweets exclude:retweets",
-    count=300,
+    count=100,
     tweet_mode="extended",
 ).items():
     try:
         api.retweet(tweet.id)
+        print(f"Retweeted tweet by {tweet.user.screen_name}")
         time.sleep(2)
         count = count + 1
     except tweepy.errors.TweepyException as e:
