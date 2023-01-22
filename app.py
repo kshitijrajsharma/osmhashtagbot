@@ -1,4 +1,5 @@
 import os
+import time
 
 import tweepy
 
@@ -24,6 +25,7 @@ for tweet in tweepy.Cursor(
     count = 0
     try:
         api.retweet(tweet.id)
+        time.sleep(2)
         count = count + 1
     except tweepy.errors.TweepyException as e:
         print(e.api_messages)
