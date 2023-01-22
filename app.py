@@ -25,7 +25,7 @@ for tweet in tweepy.Cursor(
 
     try:
         if (
-            api.rate_limit_status()["resources"]["statuses"]["/statuses/retweet/:id"][
+            api.rate_limit_status()["resources"]["statuses"]["/statuses/retweets/:id"][
                 "remaining"
             ]
             == 0
