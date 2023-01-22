@@ -18,7 +18,7 @@ except:
 for tweet in tweepy.Cursor(
     api.search_tweets,
     "#osm OR #openstreetmap OR #OSM OR #OPENSTREETMAP OR #HOTOSM OR #hotosm",
-    count=100,
+    count=300,
 ).items():
     count = 0
     try:
