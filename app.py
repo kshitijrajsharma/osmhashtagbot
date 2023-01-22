@@ -8,7 +8,7 @@ auth = tweepy.OAuthHandler(os.environ["API_KEY"], os.environ["API_KEY_SECRET"])
 auth.set_access_token(os.environ["ACCESS_TOKEN"], os.environ["ACCESS_TOKEN_SECRET"])
 
 api = tweepy.API(auth, wait_on_rate_limit=True)
-
+print(api.rate_limit_status()["resources"])
 try:
     api.verify_credentials()
     print("Authentication OK")
@@ -23,6 +23,14 @@ for tweet in tweepy.Cursor(
 ).items():
 
     try:
+        if (
+            api.rate_limit_status()["resources"]["statuses"]["/statuses/retweet/:id"][
+                "remaining"
+            ]
+            == 0
+        ):
+            print("I have reached the rate limit for this endpoint.")
+            break
         api.retweet(tweet.id)
         print(f"Retweeted tweet by {tweet.user.screen_name}")
         count = count + 1
