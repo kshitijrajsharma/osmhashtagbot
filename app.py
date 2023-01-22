@@ -17,13 +17,16 @@ except:
 
 for tweet in tweepy.Cursor(
     api.search_tweets,
-    "#osm OR #openstreetmap OR #OSM OR #OPENSTREETMAP OR #HOTOSM OR #hotosm filter:nativeretweets",
+    "#osm OR #openstreetmap OR #OSM OR #OPENSTREETMAP OR #HOTOSM OR #hotosm exclude:retweets",
     count=300,
+    tweet_mode="extended",
 ).items():
     count = 0
     try:
         api.retweet(tweet.id)
         count = count + 1
-    except Exception as e:
-        print(e)
+    except tweepy.TweepError as e:
+        print(e.reason)
+    except StopIteration:
+        break
 print(f"Retweeted {count} tweets")
