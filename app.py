@@ -8,7 +8,7 @@ auth = tweepy.OAuthHandler(os.environ["API_KEY"], os.environ["API_KEY_SECRET"])
 auth.set_access_token(os.environ["ACCESS_TOKEN"], os.environ["ACCESS_TOKEN_SECRET"])
 
 print("started")
-api = tweepy.API(auth, wait_on_rate_limit=True)
+api = tweepy.API(auth)
 print(api.rate_limit_status())
 try:
     api.verify_credentials()
