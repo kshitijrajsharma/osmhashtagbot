@@ -23,6 +23,7 @@ for tweet in tweepy.Cursor(
 
     try:
         api.retweet(tweet.id)
+        print(f"Retweeted tweet by {tweet.user.screen_name}")
         count = count + 1
     except Exception as e:
         print(e)
