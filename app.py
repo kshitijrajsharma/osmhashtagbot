@@ -25,8 +25,9 @@ for tweet in tweepy.Cursor(
     try:
         api.retweet(tweet.id)
         count = count + 1
-    except tweepy.TweepError as e:
+    except tweepy.error.TweepError as e:
         print(e.reason)
     except StopIteration:
+        print("breaking")
         break
 print(f"Retweeted {count} tweets")
