@@ -15,7 +15,7 @@ try:
 except:
     print("Error during authentication")
 
-
+count = 0
 for tweet in tweepy.Cursor(
     api.search_tweets,
     "#osm OR #openstreetmap OR #OSM OR #OPENSTREETMAP OR #HOTOSM OR #hotosm filter:nativeretweets exclude:retweets",
@@ -23,7 +23,6 @@ for tweet in tweepy.Cursor(
     result_type="recent",
     tweet_mode="extended",
 ).items():
-    count = 0
     try:
         api.retweet(tweet.id)
         time.sleep(2)
