@@ -26,7 +26,7 @@ for tweet in tweepy.Cursor(
         api.retweet(tweet.id)
         count = count + 1
     except tweepy.errors.TweepyException as e:
-        print(e.reason)
+        print(e.api_messages)
     except StopIteration:
         print("breaking")
         break
