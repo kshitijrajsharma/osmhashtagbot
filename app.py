@@ -20,7 +20,6 @@ for tweet in tweepy.Cursor(
     api.search_tweets,
     "#osm OR #openstreetmap OR #OSM OR #OPENSTREETMAP OR #HOTOSM OR #hotosm filter:nativeretweets exclude:retweets",
     count=300,
-    result_type="recent",
     tweet_mode="extended",
 ).items():
     try:
