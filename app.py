@@ -20,20 +20,38 @@ except:
     print("Error during authentication")
 
 count = 0
-for tweet in tweepy.Cursor(
-    api.search_tweets,
-    "#osm OR #openstreetmap OR #OSM OR #OPENSTREETMAP OR #HOTOSM OR #hotosm filter:nativeretweets exclude:retweets",
+# Search for tweets
+tweets = api.search(
+    q="#openstreetmap filter:nativeretweets exclude:retweets",
     count=100,
     tweet_mode="extended",
-).items():
+)
+
+# Retweet the tweets
+for tweet in tweets:
     try:
         api.retweet(tweet.id)
-        print(f"Retweeted tweet by {tweet.user.screen_name}")
         time.sleep(2)
         count = count + 1
-    except tweepy.errors.TweepyException as e:
-        print(e.api_messages)
-    except StopIteration:
-        print("breaking")
-        break
+        print(f"Retweeted tweet by {tweet.user.screen_name}")
+    except tweepy.TweepError as e:
+        print(e.reason)
+
+
+# for tweet in tweepy.Cursor(
+#     api.search_tweets,
+#     "#osm OR #openstreetmap OR #OSM OR #OPENSTREETMAP OR #HOTOSM OR #hotosm filter:nativeretweets exclude:retweets",
+#     count=100,
+#     tweet_mode="extended",
+# ).items():
+#     try:
+#         api.retweet(tweet.id)
+#         print(f"Retweeted tweet by {tweet.user.screen_name}")
+#         time.sleep(2)
+#         count = count + 1
+#     except tweepy.errors.TweepyException as e:
+#         print(e.api_messages)
+#     except StopIteration:t
+#         print("breaking")
+#         break
 print(f"Retweeted {count} tweets")
