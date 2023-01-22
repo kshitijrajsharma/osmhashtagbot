@@ -9,6 +9,10 @@ auth.set_access_token(os.environ["ACCESS_TOKEN"], os.environ["ACCESS_TOKEN_SECRE
 
 api = tweepy.API(auth, wait_on_rate_limit=True)
 
+# Get rate limit status
+rate_limit_status = api.rate_limit_status()
+print(rate_limit_status)
+
 try:
     api.verify_credentials()
     print("Authentication OK")
