@@ -26,12 +26,14 @@ except:
 count = 0
 tweet_add_list = 0
 skkiped_tweets = 0
+total_tweets = 0
 # print(api.me())
 for tweet in tweepy.Cursor(
     api.search_tweets,
     "#openstreetmap OR #osm OR #hotosm -filter:retweets",
 ).items():
     print(f"Going over tweet by {tweet.user.screen_name}")
+    total_tweets = total_tweets + 1
 
     try:
 
@@ -58,5 +60,5 @@ with open("meta.json", "w") as file:
     json.dump(retweeted_tweets, file)
 
 print(
-    f"Retweeted {count} tweets , Added {tweet_add_list} tweets to retweet list , {skkiped_tweets} tweets skipped"
+    f"Retweeted {count} tweets , Added {tweet_add_list} tweets to retweet list , {skkiped_tweets} tweets skipped , scanned : {total_tweets}"
 )
