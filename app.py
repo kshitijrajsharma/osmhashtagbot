@@ -27,11 +27,12 @@ for tweet in tweepy.Cursor(
 
     try:
         print(tweet)
-        if api.get_user().id not in tweet.retweeters:
+        if not tweet.retweeted:
 
             api.retweet(tweet.id)
             print(f"Retweeted tweet by {tweet.user.screen_name}")
             count = count + 1
+            time.sleep(2)
 
     except Exception as e:
         print(e)
