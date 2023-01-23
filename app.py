@@ -9,7 +9,7 @@ auth.set_access_token(os.environ["ACCESS_TOKEN"], os.environ["ACCESS_TOKEN_SECRE
 
 print("started")
 api = tweepy.API(auth)
-print(api.rate_limit_status()["resources"]["statuses"])
+# print(api.rate_limit_status()["resources"]["statuses"])
 try:
     api.verify_credentials()
     print("Authentication OK")
@@ -20,8 +20,9 @@ count = 0
 for tweet in tweepy.Cursor(
     api.search_tweets,
     "#openstreetmap OR #osm OR #hotosm -filter:retweets",
-    count=300,
+    count=100,
 ).items():
+    print("Going over tweet by {tweet.user.screen_name}")
 
     try:
         if (
@@ -39,5 +40,5 @@ for tweet in tweepy.Cursor(
         # time.sleep(2)
     except Exception as e:
         print(e)
-print(api.rate_limit_status())
+# print(api.rate_limit_status()["resources"])
 print(f"Retweeted {count} tweets")
