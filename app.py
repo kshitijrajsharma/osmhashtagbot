@@ -41,6 +41,6 @@ for tweet in tweepy.Cursor(
 
     except Exception as e:
         print(e)
-        break
+        # break
 print(api.rate_limit_status()["resources"])
 print(f"Retweeted {count} tweets")
