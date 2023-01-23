@@ -1,4 +1,5 @@
 import os
+import random
 import time
 
 import tweepy
@@ -18,11 +19,13 @@ except:
 
 count = 0
 # print(api.me())
-for tweet in tweepy.Cursor(
+tweets = tweepy.Cursor(
     api.search_tweets,
     "#openstreetmap OR #osm OR #hotosm -filter:retweets",
     count=100,
-).items():
+).items()
+random.shuffle(tweets)
+for tweet in tweets:
     print(f"Going over tweet by {tweet.user.screen_name}")
 
     try:
