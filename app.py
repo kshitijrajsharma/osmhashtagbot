@@ -1,3 +1,4 @@
+import json
 import os
 import random
 import time
@@ -17,6 +18,13 @@ try:
 except:
     print("Error during authentication")
 
+# Load previously retweeted tweet IDs from JSON file
+try:
+    with open("meta.json", "r") as file:
+        retweeted_tweets = json.load(file)
+except:
+    retweeted_tweets = []
+
 count = 0
 # print(api.me())
 for tweet in tweepy.Cursor(
@@ -32,10 +40,18 @@ for tweet in tweepy.Cursor(
             # time.sleep(2)
             api.retweet(tweet.id)
             print(f"Retweeted tweet by {tweet.user.screen_name}")
+            retweeted_tweets.append(tweet.id)
             count = count + 1
 
-    except Exception as e:
-        print(e)
+    except tweepy.error.TweepError as e:
+        error_msg = e.args[0][0]["message"]
+        if error_msg == "You have already retweeted this Tweet.":
+            retweeted_tweets.append(tweet.id)
+        else:
+            print("Other Error Occured: ", error_msg)
         # break
 # print(api.rate_limit_status())
+with open("meta.json", "w") as file:
+    json.dump(retweeted_tweets, file)
+
 print(f"Retweeted {count} tweets")

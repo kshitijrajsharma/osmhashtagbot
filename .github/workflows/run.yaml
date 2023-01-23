@@ -26,3 +26,13 @@ jobs:
           BEARER_TOKEN: ${{ secrets.BEARER_TOKEN }}
         run:
           python app.py
+
+      - name: add metadata to git 
+      
+        run : |
+            git pull 
+            git config --global user.email "skshitizraj@gmail.com"
+            git config --global user.name "kshitijrajsharma"
+            git add -f meta.json
+            git commit -m "Updated Tweet Meta"
+            git push
