@@ -19,13 +19,11 @@ except:
 
 count = 0
 # print(api.me())
-tweets = tweepy.Cursor(
+for tweet in tweepy.Cursor(
     api.search_tweets,
     "#openstreetmap OR #osm OR #hotosm -filter:retweets",
     count=100,
-).items()
-random.shuffle(tweets)
-for tweet in tweets:
+).items():
     print(f"Going over tweet by {tweet.user.screen_name}")
 
     try:
@@ -40,5 +38,5 @@ for tweet in tweets:
     except Exception as e:
         print(e)
         # break
-print(api.rate_limit_status())
+# print(api.rate_limit_status())
 print(f"Retweeted {count} tweets")
