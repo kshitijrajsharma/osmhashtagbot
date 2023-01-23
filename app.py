@@ -17,6 +17,7 @@ except:
     print("Error during authentication")
 
 count = 0
+print(api.get_user().id)
 for tweet in tweepy.Cursor(
     api.search_tweets,
     "#openstreetmap OR #osm OR #hotosm -filter:retweets",
@@ -25,14 +26,6 @@ for tweet in tweepy.Cursor(
     print(f"Going over tweet by {tweet.user.screen_name}")
 
     try:
-        # if (
-        #     api.rate_limit_status()["resources"]["statuses"]["/statuses/retweets/:id"][
-        #         "remaining"
-        #     ]
-        #     == 0
-        # ):
-        #     print("I have reached the rate limit for this endpoint.")
-        #     break
         if api.get_user().id not in tweet.retweeters:
 
             api.retweet(tweet.id)
@@ -41,6 +34,6 @@ for tweet in tweepy.Cursor(
 
     except Exception as e:
         print(e)
-        # break
+        break
 print(api.rate_limit_status()["resources"])
 print(f"Retweeted {count} tweets")
