@@ -43,7 +43,7 @@ for tweet in tweepy.Cursor(
             retweeted_tweets.append(tweet.id)
             count = count + 1
 
-    except tweepy.error.TweepError as e:
+    except tweepy.errors.TweepyException as e:
         error_msg = e.args[0][0]["message"]
         if error_msg == "You have already retweeted this Tweet.":
             retweeted_tweets.append(tweet.id)
