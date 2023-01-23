@@ -26,7 +26,7 @@ for tweet in tweepy.Cursor(
     print(f"Going over tweet by {tweet.user.screen_name}")
 
     try:
-        print(tweet)
+
         if not tweet.retweeted:
 
             api.retweet(tweet.id)
@@ -36,6 +36,6 @@ for tweet in tweepy.Cursor(
 
     except Exception as e:
         print(e)
-        break
+        # break
 print(api.rate_limit_status()["resources"])
 print(f"Retweeted {count} tweets")
