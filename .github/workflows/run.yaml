@@ -2,9 +2,9 @@ name: Run twitter Bot
 on:
   schedule:
     - cron: '0 */1 * * *' # Run every 1 hour
-  # push:
-  #   branches:
-  #     - master # run also on push
+  push:
+    branches:
+      - master # run also on push
 jobs:
   issue:
     runs-on: ubuntu-latest
@@ -35,3 +35,4 @@ jobs:
             git add -f meta.json
             git commit -m "Updated Tweet Meta"
             git push --force
+        continue-on-error: true
