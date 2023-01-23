@@ -29,7 +29,7 @@ for tweet in tweepy.Cursor(
     try:
 
         if not tweet.retweeted:
-            time.sleep(2)
+            # time.sleep(2)
             api.retweet(tweet.id)
             print(f"Retweeted tweet by {tweet.user.screen_name}")
             count = count + 1
