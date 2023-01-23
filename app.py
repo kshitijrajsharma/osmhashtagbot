@@ -17,16 +17,7 @@ except:
     print("Error during authentication")
 
 count = 0
-# the screen name of the user
-screen_name = "OSM_retweet_bot"
-
-# fetching the user
-user = api.get_user(screen_name)
-
-# fetching the ID
-ID = user.id_str
-
-print("The ID of the user is : " + ID)
+print(api.me())
 for tweet in tweepy.Cursor(
     api.search_tweets,
     "#openstreetmap OR #osm OR #hotosm -filter:retweets",
