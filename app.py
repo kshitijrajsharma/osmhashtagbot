@@ -56,4 +56,4 @@ for tweet in tweepy.Cursor(
 with open("meta.json", "w") as file:
     json.dump(retweeted_tweets, file)
 
-print(f"Retweeted {count} tweets , Added {tweet_add_list} to retweet list")
+print(f"Retweeted {count} tweets , Added {tweet_add_list} to retweet list.")
