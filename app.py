@@ -34,11 +34,14 @@ for tweet in tweepy.Cursor(
             print("I have reached the rate limit for this endpoint.")
             break
         if api.get_user().id not in tweet.retweeters:
+            time.sleep(2)
             api.retweet(tweet.id)
             print(f"Retweeted tweet by {tweet.user.screen_name}")
             count = count + 1
-        # time.sleep(2)
+
     except Exception as e:
+        print(api.rate_limit_status())
         print(e)
+        break
 # print(api.rate_limit_status()["resources"])
 print(f"Retweeted {count} tweets")
