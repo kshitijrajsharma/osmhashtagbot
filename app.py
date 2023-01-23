@@ -48,7 +48,7 @@ for tweet in tweepy.Cursor(
         error_msg = str(e)
         if "You have already retweeted this Tweet" in error_msg:
             retweeted_tweets.append(tweet.id)
-            print("Already retweeted")
+            print("Added to retweeted list")
         else:
             print("Other Error Occured: ", error_msg)
         # break
