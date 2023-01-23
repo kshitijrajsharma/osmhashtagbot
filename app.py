@@ -32,9 +32,10 @@ for tweet in tweepy.Cursor(
         ):
             print("I have reached the rate limit for this endpoint.")
             break
-        api.retweet(tweet.id)
-        print(f"Retweeted tweet by {tweet.user.screen_name}")
-        count = count + 1
+        if not tweet.retweeted:
+            api.retweet(tweet.id)
+            print(f"Retweeted tweet by {tweet.user.screen_name}")
+            count = count + 1
         # time.sleep(2)
     except Exception as e:
         print(e)
