@@ -24,6 +24,7 @@ except:
     retweeted_tweets = []
 
 count = 0
+tweet_add_list = 0
 # print(api.me())
 for tweet in tweepy.Cursor(
     api.search_tweets,
@@ -47,6 +48,7 @@ for tweet in tweepy.Cursor(
         if "You have already retweeted this Tweet" in error_msg:
             retweeted_tweets.append(tweet.id)
             print("Added to retweeted list")  #
+            tweet_add_list = tweet_add_list + 1
         else:
             print("Other Error Occured: ", error_msg)
         # break
@@ -54,4 +56,4 @@ for tweet in tweepy.Cursor(
 with open("meta.json", "w") as file:
     json.dump(retweeted_tweets, file)
 
-print(f"Retweeted {count} tweets")
+print(f"Retweeted {count} tweets , Added {tweet_add_list} to retweet list")
