@@ -25,6 +25,7 @@ except:
 
 count = 0
 tweet_add_list = 0
+skkiped_tweets = 0
 # print(api.me())
 for tweet in tweepy.Cursor(
     api.search_tweets,
@@ -51,9 +52,12 @@ for tweet in tweepy.Cursor(
             tweet_add_list = tweet_add_list + 1
         else:
             print("Other Error Occured: ", error_msg)
+            skkiped_tweets = skkiped_tweets + 1
         # break
 # print(api.rate_limit_status())
 with open("meta.json", "w") as file:
     json.dump(retweeted_tweets, file)
 
-print(f"Retweeted {count} tweets , Added {tweet_add_list} to retweet list.")
+print(
+    f"Retweeted {count} tweets , Added {tweet_add_list} tweets to retweet list , {skkiped_tweets} tweets skipped"
+)
