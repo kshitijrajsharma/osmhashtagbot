@@ -19,7 +19,7 @@ except:
 count = 0
 for tweet in tweepy.Cursor(
     api.search_tweets,
-    "#openstreetmap -filter:retweets",
+    "#openstreetmap OR #osm OR #hotosm -filter:retweets",
     count=300,
 ).items():
 
