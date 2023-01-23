@@ -38,15 +38,17 @@ for tweet in tweepy.Cursor(
 
         if not tweet.retweeted:
             # time.sleep(2)
-            api.retweet(tweet.id)
-            print(f"Retweeted tweet by {tweet.user.screen_name}")
-            retweeted_tweets.append(tweet.id)
-            count = count + 1
+            if tweet.id not in retweeted_tweets:
+                api.retweet(tweet.id)
+                print(f"Retweeted tweet by {tweet.user.screen_name}")
+                retweeted_tweets.append(tweet.id)
+                count = count + 1
 
     except tweepy.errors.TweepyException as e:
         error_msg = str(e)
         if "You have already retweeted this Tweet" in error_msg:
             retweeted_tweets.append(tweet.id)
+            print("Already retweeted")
         else:
             print("Other Error Occured: ", error_msg)
         # break
