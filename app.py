@@ -22,7 +22,7 @@ for tweet in tweepy.Cursor(
     "#openstreetmap OR #osm OR #hotosm -filter:retweets",
     count=100,
 ).items():
-    print("Going over tweet by {tweet.user.screen_name}")
+    print(f"Going over tweet by {tweet.user.screen_name}")
 
     try:
         if (
@@ -33,7 +33,7 @@ for tweet in tweepy.Cursor(
         ):
             print("I have reached the rate limit for this endpoint.")
             break
-        if not tweet.retweeted:
+        if api.get_user().id not in tweet.retweeters:
             api.retweet(tweet.id)
             print(f"Retweeted tweet by {tweet.user.screen_name}")
             count = count + 1
