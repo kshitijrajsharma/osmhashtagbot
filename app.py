@@ -26,7 +26,7 @@ for tweet in tweepy.Cursor(
     print(f"Going over tweet by {tweet.user.screen_name}")
 
     try:
-        print(tweet.retweeters)
+        print(tweet)
         if api.get_user().id not in tweet.retweeters:
 
             api.retweet(tweet.id)
