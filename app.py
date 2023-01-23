@@ -17,7 +17,7 @@ except:
     print("Error during authentication")
 
 count = 0
-print(api.me())
+# print(api.me())
 for tweet in tweepy.Cursor(
     api.search_tweets,
     "#openstreetmap OR #osm OR #hotosm -filter:retweets",
@@ -26,6 +26,7 @@ for tweet in tweepy.Cursor(
     print(f"Going over tweet by {tweet.user.screen_name}")
 
     try:
+        print(tweet.retweeters)
         if api.get_user().id not in tweet.retweeters:
 
             api.retweet(tweet.id)
